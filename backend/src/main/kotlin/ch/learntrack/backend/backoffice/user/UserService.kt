@@ -30,6 +30,12 @@ public class UserService(
 
     public fun getAllAdminUsers(): List<UserDto> = userDao.fetchAllAdminUsers().map(::mapToDto)
 
+    public fun getAllAdminsForSchool(schoolId: UUID): List<UserDto> = userDao.fetchAllAdminsForSchool(schoolId).map(
+        ::mapToDto,
+    )
+
+    public fun getUserCount(schoolId: UUID, userRole: UserRole): Int = userDao.countTeachersInSchool(schoolId, userRole)
+
     public fun createAdminUser(createUserDto: CreateUserDto) {
         val emailLowerCase = createUserDto.email.trim().lowercase()
 
